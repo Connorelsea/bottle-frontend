@@ -1,0 +1,66 @@
+$button-color-bg: darken(gray, 10);
+$button-color-font: #e9ebee;
+
+.Login {
+  font-family: "Rubik";
+  font-weight: 400;
+  padding: 60px 0;
+  max-width: 600px;
+  margin: 0 auto;
+
+  &--Button {
+    font-family: "Rubik";
+    font-weight: 300;
+    font-size: 1.4em;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    margin: 0px;
+    transition: all 0.3s;
+
+    &:hover {
+      letter-spacing: .08em;
+    }
+  }
+
+  &--Header {
+    display: flex;
+    flex-direction: column;
+
+    &--Top {
+      display: flex;
+      align-items: center;
+    }
+
+    &--Logo {
+      width: 70px;
+      padding-right: 20px;
+    }
+
+    &--Title {
+      font-weight: 300;
+      font-size: 2em;
+    }
+
+    &--Text {
+      padding: 5px 0;
+      font-size: 1.2em;
+      font-weight: 300;
+
+      &__Upper {
+        margin-top: 40px;
+      }
+
+      &__Lower {
+        margin-bottom: 30px;
+        color: lighten(black, 40);
+      }
+    }
+
+  }
+
+}
