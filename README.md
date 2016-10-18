@@ -5,7 +5,7 @@
 
 #### Technical Explanation
 
-Bottle is a planned social network that revolves around "casting" a message in a bottle anonymously. These bottle messages are grouped together based on location and displayed to people viewing the app near that location. If someone views a bottle message and enjoys it or wants to continue the conversation, they can respond, initiating an anonymous conversation where you can keep discussing the topic at hand. Conversations start off completely anonymous to name, gender, etc - and once you are comfortable talking to this person, you can both use the app to mutually agree to reveal your information to each other.
+The social network revolves around "casting" a message in a bottle anonymously. These bottle messages are grouped together based on location and displayed to people viewing the app near that location. If someone views a bottle message and enjoys it or wants to continue the conversation, they can respond, initiating an anonymous conversation where you can keep discussing the topic at hand. Conversations start off completely anonymous to name, gender, etc - and once you are comfortable talking to this person, you can both use the app to mutually agree to reveal your information to each other. You earn badges based on the areas that you visit in a passport-booklet styled container. This encourages a unique idea of traveling, meeting new people, etc. 
 
 These ideas will be refined during development. The main goal of the app is to create a interesting take on local friend-finding. Heavy work will be done on the reporting system, etc., to ensure user safety and combat all attempts to use the app as a dating app.
 
