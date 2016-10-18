@@ -1,3 +1,16 @@
+
+## Bottle
+
+"Bottle - A social network for meeting new friends. Cast a bottle, get a response, start a conversation."
+
+#### Technical Explanation
+
+Bottle is a planned social network that revolves around "casting" a message in a bottle anonymously. These bottle messages are grouped together based on location and displayed to people viewing the app near that location. If someone views a bottle message and enjoys it or wants to continue the conversation, they can respond, initiating an anonymous conversation where you can keep discussing the topic at hand. Conversations start off completely anonymous to name, gender, etc - and once you are comfortable talking to this person, you can both use the app to mutually agree to reveal your information to each other.
+
+These ideas will be refined during development. The main goal of the app is to create a interesting take on local friend-finding. Heavy work will be done on the reporting system, etc., to ensure user safety and combat all attempts to use the app as a dating app.
+
+## React.JS
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.  
