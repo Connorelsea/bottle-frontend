@@ -3,8 +3,9 @@
    License: none (public domain)
 */
 
-body {
-  background-color: #e9ebee;
+* {
+  font-family: "Somatic";
+  box-sizing: border-box;
 }
 
 html, body, div, span, applet, object, iframe,
@@ -24,7 +25,6 @@ time, mark, audio, video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */

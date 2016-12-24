@@ -6,8 +6,6 @@ import history from  "../../utils/history"
 
 import { doNavigation } from "../../redux/ducks/Router"
 
-import { Match, Miss, Link, Redirect } from "react-router"
-
 type Props = {
   location: object,
   action: string,

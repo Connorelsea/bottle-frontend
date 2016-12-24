@@ -1,15 +1,13 @@
 import React    from 'react'
 import ReactDOM from 'react-dom'
 
-import AppContainer from "./containers/App/AppContainer"
-import "./styles/index.scss"
+import Router from "containers/Router/RouterContainer"
+import AppContainer from "containers/App/AppContainer"
+
+import "styles/index.css"
 
 import { Provider } from "react-redux"
-import configureStore from "./redux/utils/store"
-
-import Router from "./containers/Router/RouterContainer"
-
-import { Match, Miss, Link, Redirect } from "react-router"
+import configureStore from "redux/utils/store"
 
 const store = configureStore()
 

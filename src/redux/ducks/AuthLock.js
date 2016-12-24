@@ -36,6 +36,8 @@ export default function reducer(state = defaultState, action) {
 
 // Auth Lock
 
+console.log(process.env.REACT_APP_AUTH0_CLIENT_ID)
+
 export const AuthLock = new Auth0Lock(
   process.env.REACT_APP_AUTH0_CLIENT_ID,
   process.env.REACT_APP_AUTH0_DOMAIN,
@@ -82,6 +84,7 @@ export const doAuthentication = () => {
           return dispatch(lockError(error))
         }
 
+        console.log("Auth Result")
         console.log(authResult)
 
         localStorage.setItem("profile", JSON.stringify(profile))
@@ -89,7 +92,7 @@ export const doAuthentication = () => {
 
         return dispatch(batchActions([
           lockSuccess(profile, authResult.id_token),
-          setLocation("/radio")
+          //setLocation("/radio")
         ]))
 
       })

@@ -1,12 +1,14 @@
-var path = require('path');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ManifestPlugin = require('webpack-manifest-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
+
+
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
@@ -31,14 +33,14 @@ var homepagePathname = homepagePath ? url.parse(homepagePath).pathname : '/';
 var publicPath = ensureSlash(homepagePathname, true);
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
-// Omit trailing shlash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
+// Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
 var publicUrl = ensureSlash(homepagePathname, false);
-// Get enrivonment variables to inject into our app.
+// Get environment variables to inject into our app.
 var env = getClientEnvironment(publicUrl);
 
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
-if (env['process.env.NODE_ENV'] !== '"production"') {
+if (env['process.env'].NODE_ENV !== '"production"') {
   throw new Error('Production builds must have NODE_ENV=production.');
 }
 
@@ -97,6 +99,32 @@ module.exports = {
       }
     ],
     loaders: [
+      // Default loader: load all assets that are not handled
+      // by other loaders with the url loader.
+      // Note: This list needs to be updated with every change of extensions
+      // the other loaders match.
+      // E.g., when adding a loader for a new supported file extension,
+      // we need to add the supported extension to this loader too.
+      // Add one new line in `exclude` for each loader.
+      //
+      // "file" loader makes sure those assets end up in the `build` folder.
+      // When you `import` an asset, you get its filename.
+      // "url" loader works just like "file" loader but it also embeds
+      // assets smaller than specified size as data URLs to avoid requests.
+      {
+        exclude: [
+          /\.html$/,
+          /\.(js|jsx)$/,
+          /\.css$/,
+          /\.json$/,
+          /\.svg$/
+        ],
+        loader: 'url',
+        query: {
+          limit: 10000,
+          name: 'static/media/[name].[hash:8].[ext]'
+        }
+      },
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
@@ -118,15 +146,7 @@ module.exports = {
       // in the main CSS file.
       {
         test: /\.css$/,
-        // "?-autoprefixer" disables autoprefixer in css-loader itself:
-        // https://github.com/webpack/css-loader/issues/281
-        // We already have it thanks to postcss. We only pass this flag in
-        // production because "css" loader only enables autoprefixer-powered
-        // removal of unnecessary prefixes when Uglify plugin is enabled.
-        // Webpack 1.x uses Uglify plugin as a signal to minify *all* the assets
-        // including CSS. This is confusing and will be removed in Webpack 2:
-        // https://github.com/webpack/webpack/issues/283
-        loader: ExtractTextPlugin.extract('style', 'css?-autoprefixer!postcss')
+        loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss')
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
@@ -135,22 +155,11 @@ module.exports = {
         test: /\.json$/,
         loader: 'json'
       },
-      // "file" loader makes sure those assets end up in the `build` folder.
-      // When you `import` an asset, you get its filename.
+      // "file" loader for svg
       {
-        test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+        test: /\.svg$/,
         loader: 'file',
         query: {
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
-      },
-      // "url" loader works just like "file" loader but it also embeds
-      // assets smaller than specified size as data URLs to avoid requests.
-      {
-        test: /\.(mp4|webm|wav|mp3|m4a|aac|oga)(\?.*)?$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
         }
       }
@@ -219,7 +228,13 @@ module.exports = {
       }
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin('static/css/[name].[contenthash:8].css')
+    new ExtractTextPlugin('static/css/[name].[contenthash:8].css'),
+    // Generate a manifest file which contains a mapping of all asset filenames
+    // to their corresponding output file so that tools can pick it up without
+    // having to parse `index.html`.
+    new ManifestPlugin({
+      fileName: 'asset-manifest.json'
+    })
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
