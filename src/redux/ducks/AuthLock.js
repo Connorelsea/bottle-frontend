@@ -1,6 +1,5 @@
 import Auth0Lock from 'auth0-lock'
 import { batchActions } from 'redux-batched-actions'
-import { setLocation } from "./Location"
 
 //Action Types
 export const LOCK_SHOW    = "auth/lock/show"
@@ -16,6 +15,9 @@ const defaultState = {
 
 // Reducer
 export default function reducer(state = defaultState, action) {
+
+  console.log('action')
+  console.log(action)
 
   switch (action.type) {
 
@@ -80,8 +82,10 @@ export const doAuthentication = () => {
           return dispatch(lockError(error))
         }
 
+        console.log(authResult)
+
         localStorage.setItem("profile", JSON.stringify(profile))
-        localStorage.setItem("id_token", authResult.id_token)
+        localStorage.setItem("id_token", authResult.idToken)
 
         return dispatch(batchActions([
           lockSuccess(profile, authResult.id_token),

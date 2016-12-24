@@ -1,18 +1,27 @@
 import React    from 'react'
 import ReactDOM from 'react-dom'
 
-import App from "./components/App/App"
+import AppContainer from "./containers/App/AppContainer"
 import "./styles/index.scss"
 
-import configureStore from "./redux/store"
+import { Provider } from "react-redux"
+import configureStore from "./redux/utils/store"
 
-import Router from "./components/Router/Router"
+import Router from "./containers/Router/RouterContainer"
+
+import { Match, Miss, Link, Redirect } from "react-router"
 
 const store = configureStore()
 
 ReactDOM.render(
   <div>
-    <Router store={store} />
+    <Provider store={store} >
+      <Router>
+
+        <AppContainer />
+
+      </Router>
+    </Provider>
   </div>,
   document.getElementById('root')
 )

@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import GoogleLogin from "react-google-login"
-import { processLogin } from "../../utils/login-utils.js"
 
 import "./Login.scss"
 import logo from "../../images/logo.svg"

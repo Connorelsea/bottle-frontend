@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'react-router/Link'
+import { Link } from "react-router"
 
 const links = [
   { title: "Dashboard", route: "/" },

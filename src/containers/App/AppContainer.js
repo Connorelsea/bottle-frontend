@@ -1,43 +1,40 @@
 import React, { Component } from 'react'
 
-import { Provider } from "react-redux"
 import { connect } from 'react-redux'
-import DevTools from "../../redux/devtools"
+import DevTools from "../../redux/utils/devtools"
 
 import { doLogin, doAuthentication } from "../../redux/ducks/AuthLock"
 
-import App from "./App"
+import { hasUser } from "../../utils/login"
+
+import App from "../../components/App/App"
+import Login from "../../components/Login/Login"
 
 type Props = {
   store: object,
   doLogin: func,
   doAuthentication: func,
+  loggedIn: boolean,
 };
 
 class AppContainer extends Component {
 
-  props: Props;
-
-  constructor(props) {
-    super(props)
-
-    props.doAuthentication()
+  componentDidMount() {
+    this.props.doAuthentication()
   }
+
+  props: Props;
 
   render() {
     return (
-      <div className="AppContainer">
-        <Provider store={this.props.store} >
-          <div>
+      <div className="App-Container">
 
-            <App
-              doLogin={this.props.doLogin}
-            />
+        {hasUser()
+          ? <App doAuthentication={this.props.doAuthentication} />
+          : <Login doLogin={this.props.doLogin} /> }
 
-            <DevTools />
+        <DevTools />
 
-          </div>
-        </Provider>
       </div>
     )
   }
@@ -46,7 +43,7 @@ class AppContainer extends Component {
 
 const mapStateToProps = function(state) {
   return {
-    pathname: state.location && state.location.pathname
+    loggedIn: state.AuthLock.loggedIn,
   }
 }
 
@@ -68,4 +65,4 @@ const mapDispatchToProps = function(dispatch, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)
