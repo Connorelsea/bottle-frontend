@@ -1,0 +1,60 @@
+@import "../../styles/variables"
+
+.FeedContainer
+  height: 100%
+
+.BottleMessage
+  background-color: $gray
+  height: 100%
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+  background-image: url("../../images/art.png")
+  background-repeat: no-repeat
+  background-position: 70% 120%
+  background-size: 140%
+
+  > p
+    width: 80%
+    font-size: 2rem
+    text-align: center
+    color: $purple
+
+  &__Buttons
+    width: 350px
+    height: 200px
+    margin-top: 40px
+    position: relative
+
+  &__Button
+    position: relative
+    border-radius: 50%
+    border: 0
+    outline: none
+    color: white
+    transition: all 0.3s
+
+    &--reply
+      $dim: 200px
+      height: $dim
+      width: $dim
+      background-color: $purple
+      font-size: 2.2rem
+
+      &:hover
+        transform: scale(1.2)
+        background-color: darken($purple, 10)
+  
+    &--ignore
+      right: -20px
+      $dim: 135px
+      height: $dim
+      width: $dim
+      background-color: $light-purple
+      font-size: 1.4rem
+
+      &:hover
+        transform: scale(1.2)
+        background-color: darken($light-purple, 10)

@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import BottleMessage from "components/BottleMessage/BottleMessage"
+
 class FeedContainer extends Component {
 
   render() {
     return (
       <div className="FeedContainer">
-        Feed
+        <BottleMessage
+          content="What's the best story you could tell in a paragraph?"
+        />
       </div>
     )
   }
