@@ -9,11 +9,7 @@ import Avatar   from "icons/avatar.svg"
 
 class NavigationContainer extends Component {
 
-  generateLinks(options) {
-
-    if (!options) {
-      options = {}
-    }
+  generateLinks(options = {}) {
 
     if (!options.feed) options.feed = {}
     if (!options.chat) options.chat = {}
@@ -37,10 +33,20 @@ class NavigationContainer extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    setTimeout(() => {
       console.log("Adding badge")
-      this.setState({ links: this.generateLinks({ chat: { badge: 5 } }) })
+      this.setState({ links: this.generateLinks({ chat: { badge: 1 } }) })
     }, 2000)
+
+    setTimeout(() => {
+      console.log("Adding badge")
+      this.setState({ links: this.generateLinks({ chat: { badge: 3 } }) })
+    }, 3000)
+
+    setTimeout(() => {
+      console.log("Adding badge")
+      this.setState({ links: this.generateLinks({ chat: { badge: 7 } }) })
+    }, 4500)
   }
 
   render() {

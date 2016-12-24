@@ -18,6 +18,7 @@ class NavBar extends Component {
                 to={link.route}
                 className={`NavBar__List__Item`}
                 activeClassName={`NavBar__List__Item--Active`}
+                activeOnlyWhenExact={link.title === "Feed"}
               >
 
                 {link.badge
