@@ -10,9 +10,15 @@ export const UPDATE_CURRENT
 
 export const UPDATE_DISPLAY_SECTION
 
+// This gets new messages in the area past a certain ID
+export const GET_MESSAGES
 export const GET_MESSAGES_REQUEST
 export const GET_MESSAGES_SUCCESS
 export const GET_MESSAGES_FAILURE
+
+export const TYPES = {
+  GET_MESSAGES: Symbol("GET_MESSAGES")
+} 
 
 // Default State
 const defaultState = {
@@ -28,8 +34,14 @@ export default function reducer(state = defaultState, action) {
 
 }
 
+export const getMessages = () =>
+  createAPIAction({
+    name: GET_MESSAGES,
+    endpoint: routes.events,
+    method: "POST",
+  })
 
 // Action Creators
-export const showLock = () => ({
+export const getMessages = () => ({
   type: LOCK_SHOW,
 })
